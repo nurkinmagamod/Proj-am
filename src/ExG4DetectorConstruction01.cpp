@@ -100,7 +100,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
     0,0,1);
     G4RotationMatrix* rotm  = new G4RotationMatrix(rottemp);
     new G4PVPlacement(rotm,                       //no rotation, так же без вращения
-                    G4ThreeVector(0.*cm,0.,30.*cm),//at (0,0,-5 см) положение центра мишени в другую сторону от детектора, смещена на 5 см от центра объема World
+                    G4ThreeVector(0.*cm,0.,50.*cm),//at (0,0,-5 см) положение центра мишени в другую сторону от детектора, смещена на 5 см от центра объема World
                     logicTube,                //its logical volume, подключаем логический объем
                     "Tube",                //its name, имя физического объема
                     logicWorld,              //its mother  volume, родительский логический объем!
@@ -365,6 +365,24 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
                     false,                   //no boolean operation, без булевых операций
                     0,                       //copy number, номер копии
                     checkOverlaps);
+        // Объявляем слой PMT -----------------------------------------------------------------
+  G4Tubs* solidPMT =
+    new G4Tubs("PMT2040", 
+               0.*cm, 8.0*cm, 15*cm, 0.*deg, 360.*deg);                 
+  //Логический объем
+  G4LogicalVolume* logicPMT =
+    new G4LogicalVolume(solidPMT,            //its solid, объем
+                        world_mat,             //its material, указываем материал мишени
+                        "PMT2040");         //its name, его имя
+  // Физический объем 
+    new G4PVPlacement(rotm,                       //no rotation, так же без вращения
+                    G4ThreeVector(0.*cm,0.,-6.41*cm),//at (0,0,-5 см) положение центра мишени в другую сторону от детектора, смещена на 5 см от центра объема World
+                    logicPMT,                //its logical volume, подключаем логический объем
+                    "PMT2040",                //its name, имя физического объема
+                    logicWorld,              //its mother  volume, родительский логический объем!
+                    false,                   //no boolean operation, без булевых операций
+                    0,                       //copy number, номер копии
+                    checkOverlaps);
 
   //Всегда возвращает физический объем
   return physWorld;
@@ -463,6 +481,18 @@ void ExG4DetectorConstruction01::ConstructSDandField()
   // Добавляем чувствительный объем ко всем логическим областям с
   // именем Detector
   SetSensitiveDetector("Detector8", sd8, true);
+
+  auto sd9 
+    = new ExG4DetectorSD("DetectorSD9", "DetectorSD9HitsCollection", fNofLayers);
+  //G4String trackerChamberSDname = "DetectorSD1";
+  // Создаем экземпляр чувствительной области
+  //ExG4DetectorSD* sd1 = new ExG4DetectorSD(trackerChamberSDname);
+  // Передаем указатель менеджеру
+  G4SDManager::GetSDMpointer()->AddNewDetector(sd9);
+  // Добавляем чувствительный объем ко всем логическим областям с
+  // именем Detector
+  SetSensitiveDetector("ScintDet", sd9, true);
+
 
 }
 
