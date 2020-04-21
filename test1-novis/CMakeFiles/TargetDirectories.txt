@@ -1,0 +1,8 @@
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/install/strip.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/install/local.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/ex1.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/example2.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/edit_cache.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/rebuild_cache.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/list_install_components.dir
+/home/danikch/work/geantv3/proj/Proj-am/test1-novis/CMakeFiles/install.dir

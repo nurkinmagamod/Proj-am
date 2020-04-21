@@ -1,0 +1,47 @@
+else if (touchableVol == "Detector2") {
+				int index2 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index2 >= 0 && index2 < NOBINS){
+    		 			histogram2[index2]++;
+					}
+				}
+			else if (touchableVol == "Detector3") {
+				int index3 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index3 >= 0 && index3 < NOBINS){
+    		 			histogram3[index3]++;
+					}
+				}
+				else if (touchableVol == "Detector4") {
+				int index4 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index4 >= 0 && index4 < NOBINS){
+    		 			histogram4[index4]++;
+					}
+				}
+				else if (touchableVol == "Detector5") {
+				int index5 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index5 >= 0 && index5 < NOBINS){
+    		 			histogram5[index5]++;
+					}
+				}
+				else if (touchableVol == "Detector6") {
+				int index6 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index6 >= 0 && index6 < NOBINS){
+    		 			histogram6[index6]++;
+					}
+				}
+				else if (touchableVol == "Detector7") {
+				int index7 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index7 >= 0 && index7 < NOBINS){
+    		 			histogram7[index7]++;
+					}
+				}
+				else if (touchableVol == "Detector8") {
+				int index8 = int(floor((energy-HIST_MIN)/bin_width));
+   		  		 	if(index8 >= 0 && index8 < NOBINS){
+    		 			histogram8[index8]++;
+					}
+				}
+			//int index0 = int(floor((energy-HIST_MIN)/bin_width));
+   		   	//if(index0 >= 0 && index0 < NOBINS){
+    		// histogram0[index0]++;
+			//}
+				
