@@ -44,7 +44,8 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
 
     //Tube material
     G4Material* tube_mat = nist->FindOrBuildMaterial("G4_STAINLESS-STEEL");
-    
+    // HC det mat
+     G4Material* scint_mat = nist->FindOrBuildMaterial("G4_POLYETHYLENE");
   // Опция для включения/выключения проверки перекрытия объемов
   G4bool checkOverlaps = true;
 
@@ -108,7 +109,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
                     checkOverlaps);
     
     
-  // Детектор, для него также используем параллелепипед
+  // Детектор, для него также используем параллелепипед---------------------------------------------
   G4Box* solidDetVol =
     new G4Box("Detector",                    //its name, имя
         0.5*det_sizeX, 0.5*det_sizeY, 0.5*det_sizeZ); //its size, размеры
@@ -272,7 +273,24 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
                     false,                   //no boolean operation, без булевых операций
                     0,                       //copy number, номер копии
                     checkOverlaps);          //overlaps checking, флаг проверки перекрытия объемов
-    
+    // Объявляем сц HC -----------------------------------------------------------------
+  G4Tubs* solidScintDet =
+    new G4Tubs("ScintDet", 
+               0.*cm, 4.9*cm, 0.2*cm, 0.*deg, 360.*deg);                 
+  //Логический объем
+  G4LogicalVolume* logicScintDet =
+    new G4LogicalVolume(solidScintDet,            //its solid, объем
+                        scint_mat,             //its material, указываем материал мишени
+                        "ScintDet");         //its name, его имя
+  // Физический объем 
+    new G4PVPlacement(rotm,                       //no rotation, так же без вращения
+                    G4ThreeVector(0.*cm,0.,8.78994*cm),//at (0,0,-5 см) положение центра мишени в другую сторону от детектора, смещена на 5 см от центра объема World
+                    logicScintDet,                //its logical volume, подключаем логический объем
+                    "ScintDet",                //its name, имя физического объема
+                    logicWorld,              //its mother  volume, родительский логический объем!
+                    false,                   //no boolean operation, без булевых операций
+                    0,                       //copy number, номер копии
+                    checkOverlaps); 
   // Для мишени, на которую будет падать пучек, возьмем геометрические размеры как
   // у детектора, параллелепипед - лист вольфрама.
   G4Tubs* solidTar =
@@ -347,6 +365,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction01::Construct()
                     false,                   //no boolean operation, без булевых операций
                     0,                       //copy number, номер копии
                     checkOverlaps);
+
   //Всегда возвращает физический объем
   return physWorld;
 }
